@@ -141,6 +141,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planePrefab: {fileID: 1654175882956584, guid: 6a35c744e5010405c847fad90282d2be,
     type: 2}
+  firstPersonCamera: {fileID: 1032685722}
+  deadpoolPrefab: {fileID: 1186304085842922, guid: 188543c8167444974afcc1e3a06e9c6d,
+    type: 2}
 --- !u!4 &39900648
 Transform:
   m_ObjectHideFlags: 0
@@ -250,6 +253,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &1032685722 stripped
+Camera:
+  m_PrefabParentObject: {fileID: 20362215073346118, guid: c10877f7cd5764de18d46d7b777d1faa,
+    type: 2}
+  m_PrefabInternal: {fileID: 1284401101}
 --- !u!1001 &1284401101
 Prefab:
   m_ObjectHideFlags: 0

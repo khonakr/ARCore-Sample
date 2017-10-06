@@ -1,7 +1,7 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="MainController.cs" company="Google, Wayfair">
 //
-// Copyright 2017 Google Inc. and Wayfair Inc. All Rights Reserved.
+// Copyright 2017 Google Inc. and Wayfair LLC. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -27,6 +27,12 @@ public class MainController : MonoBehaviour {
 	// A prefab for tracking and visualizing detected planes.
 	public GameObject planePrefab;
 
+	// The first-person camera being used to render the passthrough camera.
+	public Camera firstPersonCamera;
+
+	// A model to place when a raycast from a user touch hits a plane.
+	public GameObject deadpoolPrefab;
+
 	// Update is called once per frame
 	void Update () {
 
@@ -47,6 +53,35 @@ public class MainController : MonoBehaviour {
 			GameObject planeObject = Instantiate(planePrefab, Vector3.zero, Quaternion.identity,
 				transform);
 			planeObject.GetComponent<PlaneVisualizer>().SetPlane(newPlanes[i]);
+		}
+
+		// See if user made an touch event
+		Touch touch;
+		if (Input.touchCount < 1 || (touch = Input.GetTouch(0)).phase != TouchPhase.Began)
+		{
+			return;
+		}
+
+		TrackableHit hitResult;
+		// Create a raycast filter
+		TrackableHitFlag raycastFilter = TrackableHitFlag.PlaneWithinBounds | TrackableHitFlag.PlaneWithinPolygon;
+
+		// Create a Raycast with touch position, filters and hitResult object
+		if (Session.Raycast(firstPersonCamera.ScreenPointToRay(touch.position), raycastFilter, out hitResult))
+		{
+			// Create an anchor to allow ARCore to track the hitpoint as understanding of the physical
+			// world evolves.
+			var anchor = Session.CreateAnchor(hitResult.Point, Quaternion.identity);
+
+			// Intanstiate a Deadpool object as a child of the anchor;
+			// It's transform will now benefit from the anchor's tracking.
+			var deadpoolObject = Instantiate(deadpoolPrefab, hitResult.Point, Quaternion.identity,
+				anchor.transform);
+
+			// Make the model look at the camera
+			deadpoolObject.transform.LookAt(firstPersonCamera.transform);
+			deadpoolObject.transform.rotation = Quaternion.Euler(0.0f,
+				deadpoolObject.transform.rotation.eulerAngles.y, deadpoolObject.transform.rotation.z);
 		}
 	}
 }
