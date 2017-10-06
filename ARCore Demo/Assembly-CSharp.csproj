@@ -98,6 +98,13 @@
      <Compile Include="Assets\GoogleARCore\SDK\Scripts\Utility\MarshalingHelper.cs" />
      <Compile Include="Assets\GoogleARCore\SDK\Scripts\Utility\ProvidedSingleton.cs" />
      <Compile Include="Assets\GoogleARCore\SDK\Scripts\Utility\SingletonComponentProvider.cs" />
+     <Compile Include="Assets\MainController.cs" />
+     <Compile Include="Assets\Plane\PlaneVisualizer.cs" />
+     <Compile Include="Assets\Point Cloud\PointCloudVisualizer.cs" />
+     <None Include="Assets\Plane\PlaneGrid.shader" />
+     <None Include="Assets\Light Estimation Shaders\MobileDiffuseWithLightEstimation.shader" />
+     <None Include="Assets\Point Cloud\PointCloud.shader" />
+     <None Include="Assets\Light Estimation Shaders\MobileSpecularWithLightEstimation.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -125,6 +132,9 @@
  <Reference Include="UnityEngine.SpatialTracking">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
  </Reference>
+ <Reference Include="GoogleAR.UnityNative">
+ <HintPath>/Users/kkhona/Desktop/MIT Workshop/Github/ARCore-Sample/ARCore Demo/Assets/GoogleARCore/SDK/Plugins/GoogleAR.UnityNative.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.Advertisements">
  <HintPath>/Users/kkhona/Library/Unity/cache/packages/packages.unity.com/com.unity.ads@0.0.17/UnityEngine.Advertisements.dll</HintPath>
  </Reference>
@@ -133,9 +143,6 @@
  </Reference>
  <Reference Include="UnityEngine.Purchasing">
  <HintPath>/Users/kkhona/Library/Unity/cache/packages/packages.unity.com/com.unity.purchasing@0.0.19/UnityEngine.Purchasing.dll</HintPath>
- </Reference>
- <Reference Include="GoogleAR.UnityNative">
- <HintPath>/Users/kkhona/Desktop/MIT Workshop/Github/ARCore-Sample/ARCore Demo/Assets/GoogleARCore/SDK/Plugins/GoogleAR.UnityNative.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
